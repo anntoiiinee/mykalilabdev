@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  kalilinux:
+    image: docker.io/kalilinux/kali-rolling:latest
+    container_name: kali
+    hostname: kali-pentest.local
+    user: 'root'
+    tty: true
+    privileged: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /Kalilinuxlab/sandbox/:/tmp/:z,rw
