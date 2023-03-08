@@ -1,24 +1,3 @@
-init:
-	echo "Installing prerequisites on $(shell hostname)"
-	sudo dnf install -y podman podman-docker docker-compose wget
-	sudo systemctl enable podman.socket
-	sudo systemctl start podman.socket
-	sudo systemctl status podman.socket
-	systemctl --user enable podman.socket
-	systemctl --user start podman.socket
-	systemctl --user status podman.socket
-	sudo touch /etc/containers/nodocker
-	export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
-	sudo curl -H "Content-Type: application/json" --unix-socket /var/run/docker.sock http://localhost/_ping
-
-install-containerlab:
-	sudo setsebool -P selinuxuser_execmod 1
-	cd /tmp/ && wget https://raw.githubusercontent.com/srl-labs/containerlab/main/get.sh
-	chmod +x /tmp/get.sh && sudo /tmp/get.sh
-
-build-kali:
-	cd kalilinux && sudo docker-compose up --build -d
-
 build-tinycore:
 	cd tinycore && sudo
 
