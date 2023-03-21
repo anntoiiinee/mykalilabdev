@@ -1,11 +1,9 @@
 # Official base image
-FROM docker.io/kalilinux/kali-rolling:latest AS base
+FROM kalilinux/kali-rolling
 
-RUN apt update\
-	&& apt-get install -y --no-install-recommends apt-utils \
-	&& apt-get install -y --no-install-recommends vim \
-	&& apt-get autoremove -y \
-	&& apt-get autoclean -y \
-	&& rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get -y update && apt-get -y dist-upgrade && apt-get -y autoremove && apt-get clean
+RUN apt-get update && apt-get -y install kali-tools-top10 exploitdb man-db dirb nikto wpscan uniscan
 
-ENTRYPOINT ["/bin/bash"]
+WORKDIR /root
+CMD ["/bin/bash"]

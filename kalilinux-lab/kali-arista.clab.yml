@@ -1,0 +1,23 @@
+name: kali-linux-lab
+
+topology:
+  kinds:
+    ceos:
+      image: ceosimage:4.29.2F
+      image-pull-policy: Never
+    kali:
+      image: kalilinux:latest
+      image-pull-policy: Never
+
+  nodes:
+    leaf1:
+      kind: ceos
+    leaf2:
+      kind: ceos
+    spine1:
+      kind: ceos
+
+  links:
+   # spine leaf links
+    - endpoints: ["leaf1:eth1","spine1:eth1"]
+    - endpoints: ["leaf2:eth1","spine1:eth2"]
