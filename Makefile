@@ -26,3 +26,6 @@ build-lab:
 
 map-lab:
 	cd /home/antoine/mykalilabdev/kalilinux-lab && containerlab graph -t kali-arista.clab.yml
+
+destroy:
+	cd /home/antoine/mykalilabdev/kalilinux-lab && containerlab destroy
