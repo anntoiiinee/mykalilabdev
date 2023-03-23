@@ -5,7 +5,7 @@ topology:
     ceos:
       image: ceosimage:4.29.2F
       image-pull-policy: Never
-    kali:
+    linux:
       image: kalilinux:latest
       image-pull-policy: Never
 
@@ -16,8 +16,11 @@ topology:
       kind: ceos
     spine1:
       kind: ceos
+    linux:
+      kind: linux
 
   links:
    # spine leaf links
     - endpoints: ["leaf1:eth1","spine1:eth1"]
     - endpoints: ["leaf2:eth1","spine1:eth2"]
+    - endpoints: ["leaf2:eth3","linux:eth1"]
